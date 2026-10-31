@@ -1,20 +1,134 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Fadewin - Play Games & Win Money</title>
-<meta name="monetag" content="c572032c2c1d4d3367fce7ba639a20da">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FADEWIN - Play Games Win Money</title>
+
+<!-- MONETAG VERIFICATION - YOUR ID -->
+<meta name="monetag" content="c572032c2c1d4d3367fce7ba639a20da">
+
+<!-- MONETAG ADS - ZONE 12160490 - THIS ONE GO SHOW AD WHEN PERSON CLICK -->
+<script>(function(s){s.dataset.zone='12160490',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
 <style>
-body { background: #0f0f0f; color: white; text-align: center; padding: 50px; font-family: sans-serif; }
-h1 { color: #00ff88; font-size: 40px; }
-.btn { background: #00ff88; color: black; padding: 15px 30px; border-radius: 10px; font-size: 20px; text-decoration: none; display: inline-block; margin-top: 20px; font-weight: bold; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#fff;font-family:Arial,sans-serif;text-align:center}
+.header{padding:50px 20px 30px;background:radial-gradient(circle at 50% 0%, #00ff8830, transparent 70%)}
+.header h1{font-size:48px;color:#00ff88;font-weight:900}
+.header h2{margin-top:10px;font-size:18px}
+.btn-main{background:#00ff88;color:#000;border:none;padding:18px 45px;border-radius:50px;font-weight:900;font-size:20px;margin-top:20px;cursor:pointer}
+.wrap{max-width:430px;margin:0 auto;padding:20px;display:grid;gap:20px;text-align:left}
+.card{background:#161616;border:1px solid #222;border-radius:22px;padding:22px}
+.card h3{color:#00ff88;font-size:20px}
+.score{font-size:36px;font-weight:900;color:#00ff88;margin:10px 0}
+.tapBox{background:#222;border-radius:16px;height:130px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;cursor:pointer;margin:12px 0;user-select:none}
+.btn{background:#00ff88;color:#000;border:none;padding:15px;border-radius:12px;font-weight:900;width:100%;cursor:pointer;font-size:17px;margin-top:10px}
+.row{display:flex;gap:8px}
+.footer{text-align:center;padding:30px;color:#555;font-size:12px}
+.ad-note{color:#00ff88;font-size:11px;margin-top:10px;text-align:center}
 </style>
 </head>
 <body>
+
+<div class="header">
 <h1>🎮 FADEWIN</h1>
 <h2>Play Games & Win Real Money</h2>
-<p>Your site is live! Monetag verification active.</p>
-<a href="#" class="btn">START PLAYING</a>
+<p style="color:#999;margin-top:8px;font-size:13px;">Click any game = Ad go show, you go earn!</p>
+<button class="btn-main" onclick="document.getElementById('games').scrollIntoView({behavior:'smooth'})">START PLAYING ↓</button>
+<p class="ad-note">Monetag Zone 12160490 Active ✅</p>
+</div>
+
+<div class="wrap" id="games">
+
+<!-- GAME 1 -->
+<div class="card">
+<h3>👆 TAP RUSH - 10 Sec</h3>
+<p style="color:#888;font-size:13px;">Tap as fast as you can!</p>
+<div class="score" id="tapScore">0</div>
+<div class="tapBox" id="tapBox" onclick="doTap()">TAP ME!</div>
+<button class="btn" onclick="startTap()">START / RESET GAME</button>
+<p id="tapTime" style="color:#888;font-size:13px;margin-top:8px;text-align:center">Click START</p>
+</div>
+
+<!-- GAME 2 -->
+<div class="card">
+<h3>🎡 SPIN & WIN</h3>
+<p style="color:#888;font-size:13px;">Click to spin and win points</p>
+<div class="score" id="spinResult">🎯 Ready to Spin</div>
+<button class="btn" onclick="doSpin()">SPIN NOW 🎡</button>
+<p style="color:#666;font-size:11px;margin-top:8px;text-align:center">Ad go show after you spin - na your money be that!</p>
+</div>
+
+<!-- GAME 3 -->
+<div class="card">
+<h3>🧠 QUICK MATH</h3>
+<p style="color:#888;font-size:13px;">Solve correctly to earn</p>
+<p id="mathQ" style="font-size:26px;margin:12px 0;font-weight:900;text-align:center">5 + 3 = ?</p>
+<div class="score" id="mathScore" style="text-align:center">0 Correct</div>
+<div class="row">
+<button class="btn" onclick="checkMath(1)">1</button>
+<button class="btn" onclick="checkMath(8)">8</button>
+<button class="btn" onclick="checkMath(7)">7</button>
+<button class="btn" onclick="checkMath(10)">10</button>
+</div>
+</div>
+
+</div>
+
+<div class="footer">
+sundizzy064a-ux.github.io<br>
+Monetag ID: c572032c2c1d4d3367fce7ba639a20da<br>
+Zone: 12160490 ✅ Verified & Earning
+</div>
+
+<script>
+// TAP GAME LOGIC
+let taps=0,timer=null,timeLeft=10,playing=false;
+function startTap(){
+ taps=0;timeLeft=10;playing=true;
+ document.getElementById('tapScore').innerText='0';
+ document.getElementById('tapTime').innerText=timeLeft+'s left - TAP FAST!';
+ clearInterval(timer);
+ timer=setInterval(()=>{
+  timeLeft--;
+  document.getElementById('tapTime').innerText=timeLeft+'s left';
+  if(timeLeft<=0){
+   clearInterval(timer);playing=false;
+   document.getElementById('tapTime').innerText='FINISH! Score: '+taps+' - Click RESET to play again!';
+  }
+ },1000);
+}
+function doTap(){
+ if(!playing){startTap();return;}
+ taps++;
+ document.getElementById('tapScore').innerText=taps;
+}
+
+// SPIN GAME LOGIC
+function doSpin(){
+ const prizes=['10 Points! 🎉','50 Points! 🔥','5 Points','JACKPOT 100! 💰💰','Try Again 😅','20 Points!','30 Points! ⭐','MEGA 200! 🚀'];
+ document.getElementById('spinResult').innerText=prizes[Math.floor(Math.random()*prizes.length)];
+}
+
+// MATH GAME LOGIC
+let correct=0,a=5,b=3;
+function newMath(){
+ a=Math.floor(Math.random()*15)+1;
+ b=Math.floor(Math.random()*15)+1;
+ document.getElementById('mathQ').innerText=a+' + '+b+' = ?';
+}
+function checkMath(ans){
+ if(ans===a+b){
+  correct++;
+  document.getElementById('mathScore').innerText=correct+' Correct ✅';
+  newMath();
+ }else{
+  alert('Wrong! Correct answer na '+(a+b));
+ }
+}
+newMath();
+</script>
+
 </body>
 </html>
